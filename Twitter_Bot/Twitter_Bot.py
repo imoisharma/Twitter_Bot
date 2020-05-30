@@ -13,4 +13,12 @@ search='devops'
 
 number_of_tweets=100
 
-for tweet in tweepy.Cursor(api.search)
+for tweet in tweepy.Cursor(api.search,search).items(number_of_tweets):
+    try:
+        print("Tweeted")
+        tweet.retweet()
+        time.sleep(60)
+    except tweepy.TweepError as e:
+        print(e.reason)
+    except StopIteration:
+        break
