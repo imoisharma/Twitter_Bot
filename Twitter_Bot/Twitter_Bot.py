@@ -9,15 +9,16 @@ api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
 
 user = api.me()
 
-search='devops'
+search=['devops','ML']
 
-number_of_tweets=100
+number_of_tweets=1000
 
 for tweet in tweepy.Cursor(api.search,search).items(number_of_tweets):
     try:
         print("Tweeted")
         tweet.retweet()
-        time.sleep(60)
+        tweet.favorite()
+        time.sleep(60*5)
     except tweepy.TweepError as e:
         print(e.reason)
     except StopIteration:
